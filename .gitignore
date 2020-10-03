@@ -1,0 +1,4 @@
+## git ignore these files to track ##
+src/__pycache__/
+src/libs/__pycache__/
+.pyc
