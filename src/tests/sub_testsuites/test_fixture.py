@@ -25,34 +25,56 @@ import pytest
     # func = MyFixtures.test_func()
 
 
-@pytest.mark.feature1 # $pytest -v -m "feature1" pytest1.py (need prepare pytest.ini)
-def test_1(setup_function):
-    print('~~~~~Test_1 called.')
+@pytest.mark.test_function # $pytest -v -m "feature1" pytest1.py (need prepare pytest.ini)
+def test_1_1(setup_function):
+    print('~~~~~Test_1—1 called.')
 
-@pytest.mark.feature2
-@pytest.mark.fixture_feature2
+@pytest.mark.test_function 
+def test_1_2(setup_function):
+    print('~~~~~Test_1—2 called.')
+
+@pytest.mark.test_function 
+def test_1_3():
+    print('~~~~~Test_1—3 called.')
+
+
+@pytest.mark.test_module
 def test_2_1(setup_module):
     print(type(setup_module))
     assert "ok" # 通过assert return true or false
     print('~~~~~Test_2_1 called.')
 
-@pytest.mark.fixture_feature2
+@pytest.mark.test_module
 def test_2_2(setup_module):
     print(type(setup_module))
     assert "ok" # 通过assert return true or false
     print('~~~~~Test_2_2 called.')
 
-
-@pytest.mark.fixture_feature2
+@pytest.mark.test_module
 def test_2_3(setup_module):
     print(type(setup_module))
     assert "ok" # 通过assert return true or false
     print('~~~~~Test_2_3 called.')
 
-@pytest.mark.feature3
-def test_3(funcss):
-    print('~~~~~ Test_3 called.')
-    assert 2==1+1              
+
+@pytest.mark.test_session
+def test_3_1(sess_scope):
+    print(type(sess_scope))
+    assert "ok" 
+    print('~~~~~Test_3_1 called.')            
+
+@pytest.mark.test_session
+def test_3_2(sess_scope):
+    print(type(sess_scope))
+    assert "ok" 
+    print('~~~~~Test_3_2 called.') 
+
+@pytest.mark.test_session
+def test_3_3(sess_scope):
+    print(type(sess_scope))
+    assert "ok" 
+    print('~~~~~Test_3_3 called.') 
+
 
 # if __name__=='__main__':
 #     print("start")
