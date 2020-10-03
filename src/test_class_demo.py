@@ -1,11 +1,11 @@
 import pytest
 
 # class TestClassDemoInstance:
-@pytest.mark.feature1
+# @pytest.mark.feature1
 def test_one():
 	assert "ok"
 
-@pytest.mark.feature2
+# @pytest.mark.feature2
 def test_two():
 	assert "ok"
 

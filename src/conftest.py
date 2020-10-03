@@ -1,9 +1,15 @@
-# -*- coding:utf-8 -*-
+#fixture可以放在单独的测试文件里，如果希望多个测试文件共享fixture，可以在公共目录下新建一个conftest.py，将fixture放在其中。
+# 使用--setup-show 回溯fixture的执行过程
+# $ pytest -v --setup-show test_demo8.py
 
 import pytest
 
+@pytest.fixture()
+def common_fixture():
+    print("here is inside common_fixture")
+    return 1
 
-######################### define fixures
+
 @pytest.fixture(scope='function') # function：每个test都运行，默认是function的scope
 def setup_function(request):
     def teardown_function():
@@ -17,25 +23,9 @@ def setup_module(request):
         print("[teardown_module called.]")
     request.addfinalizer(teardown_module)
     print('[setup_module called.]')
-#########################
 
 
-
-
-@pytest.mark.feature1 # $pytest -v -m "feature1" pytest1.py (need prepare pytest.ini)
-def test_1(setup_function):
-    print('-----Test_1 called.')
-
-@pytest.mark.feature2
-@pytest.mark.fixture_feature2
-def test_2(setup_module):
-    assert "ok"
-    print('-----Test_2 called.')
-
-@pytest.mark.feature3
-def test_3(setup_module):
-    print('-----Test_3 called.')
-    assert 2==1+1              # 通过assert断言确认测试结果是否符合预期
-
-
-
+@pytest.fixture(scope='module')
+def test_fixture():
+    print("here inside test_fixture")
+    return " --- hello!!"
