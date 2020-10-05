@@ -1,0 +1,29 @@
+$ pytest --cov-report=html --cov=./src
+#fixture可以放在单独的测试文件里，如果希望多个测试文件共享fixture，名字必须叫做 conftest.py，将fixture放在其中。
+# 使用--setup-show 回溯fixture的执行过程
+# $ pytest -v --setup-show  -》show setup of fixtures while executing tests.
+
+# scope参数可以是session， module，class，function； 默认为function
+# session 会话级别： 每个session只运行一次，session级别的fixture需要定义到conftest.py中
+# module 模块级别：模块里所有的用例执行前执行一次module级别的fixture
+# class 类级别 ：每个类执行前都会执行一次class级别的fixture
+# function ：这个默认是默认的模式，函数级别的，每个测试用例执行前都会执行一次function级别的fixture
+
+
+$ vi pytest.ini
+[pytest]
+# doc: https://www.cnblogs.com/linuxchao/p/linuxchao-pytest-configfile.html
+
+testpaths = ./src
+
+# $ pytest -vs
+addopts = -vs 
+
+# $ pytest -m "feature3" pytest1.py
+markers =
+    test_function: mark a test as test_function.
+    test_module: markers a test as test_module.
+    fixture_feature2: only mark fixture_feature2
+    test_session: mark a test as feature3.
+    feature_webdriver: mark test for web console
+
