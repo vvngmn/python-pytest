@@ -2,6 +2,12 @@
 # 使用--setup-show 回溯fixture的执行过程
 # $ pytest -v --setup-show  -》show setup of fixtures while executing tests.
 
+# scope参数可以是session， module，class，function； 默认为function
+# session 会话级别： 每个session只运行一次，session级别的fixture需要定义到conftest.py中
+# module 模块级别：模块里所有的用例执行前执行一次module级别的fixture
+# class 类级别 ：每个类执行前都会执行一次class级别的fixture
+# function ：这个默认是默认的模式，函数级别的，每个测试用例执行前都会执行一次function级别的fixture
+
 import pytest
 
 @pytest.fixture()
